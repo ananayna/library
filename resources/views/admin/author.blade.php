@@ -29,8 +29,7 @@
                             <td> {{ $author->message }}</td>
                             <td>
                                 <div class="form-check form-switch toggle-switch">
-                                    <input class="form-check-input change_status" type="checkbox"
-                                        id="toggleSwitch2" {{ $author->status  ? "checked":"" }} data-author-id="{{ $author->id }}">
+                                    <input class="form-check-input change_status" type="checkbox" id="toggleSwitch2" {{ $author->status  ? "checked":"" }} data-author-id="{{ $author->id }}">
                                   </div>
                             </td>
                             <td>
@@ -96,21 +95,17 @@
 @push('additional_js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
-
-
-// const Toast = Swal.mixin({
-//             toast: true,
-//             position: "top-end",
-//             showConfirmButton: false,
-//             timer: 3000,
-//             timerProgressBar: true,
-//             didOpen: (toast) => {
-//                 toast.onmouseenter = Swal.stopTimer;
-//                 toast.onmouseleave = Swal.resumeTimer;
-//             }
-//             });
-
+        const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+         });
 
     $('.delete_btn').on('click', function(){
         Swal.fire({
@@ -127,7 +122,6 @@
         }
         });
     })
-
 
         $('.change_status').on('change', function(){
             $.ajax({
