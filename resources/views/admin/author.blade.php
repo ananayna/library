@@ -19,7 +19,7 @@
                           </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                          @foreach ($authors as $key=> $author)
+                          @forelse ($authors as $author)
                           <tr>
                             <td>{{ $author->name }}</td>
                             <td class="min-width">
@@ -46,7 +46,13 @@
                                 </form>
                             </td>
                         </tr>
-                          @endforeach
+                          @empty
+                          <tr>
+                            <td colspan="5" class="text-center text-danger">
+                                <strong>No data found!</strong>
+                            </td>
+                        </tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>

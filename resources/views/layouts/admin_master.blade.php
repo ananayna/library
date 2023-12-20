@@ -66,7 +66,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -122,7 +122,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">CMPI Library</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -146,6 +146,24 @@
                     <i class='menu-icon tf-icons bx bx-user'></i>
                   <div data-i18n="Analytics">Author</div>
                 </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle ">
+                  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                  <div data-i18n="Account Settings">category</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item {{ Route::is('admin.category.index') ? 'active':'' }}">
+                    <a href="{{ route('admin.category.index') }}" class="menu-link">
+                      <div data-i18n="Account">All Category </div>
+                    </a>
+                  </li>
+                  <li class="menu-item {{ Route::is('admin.subcategory.index') ? 'active':'' }}">
+                    <a href="{{ route('admin.subcategory.index') }}" class="menu-link">
+                      <div data-i18n="Account">Subcategory</div>
+                    </a>
+                  </li>
+                </ul>
               </li>
             {{-- <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -353,6 +371,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset('backend/assets/js/dashboards-analytics.js') }}"></script>
+    @include('sweetalert::alert')
     @stack('additional_js')
   </body>
 </html>

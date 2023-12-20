@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MyHelpers;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    use MyHelpers;
      //Author index Page
      public function index(){
         $authors = Author::latest()->get();
@@ -21,25 +23,19 @@ class AuthorController extends Controller
             'image' => 'nullable|image|mimes:jpg,png,jpeg,webp'
         ]);
 
-        $author_slug = str($request->name)->slug();
-        $slug_count = Author::where('slug','LIKE', '%'.$author_slug.'%')->count();
-        if($slug_count > 0){
-            $author_slug .= '-' . $slug_count + 1 ;
-        }
 
         if($request->hasFile('image')){
-            $image = str()->random(5).time().'.'.$request->image->extension();
-            $request->image->storeAs('Author',$image, 'public');
+            $image = $this->ImageUplode($request->image, 'Author');
         }
 
         $author = new Author();
 
         $author->name = $request->name;
-        $author->slug = $author_slug;
+        $author->slug = $this->slug_Generator($request->name, Author::class);
         $author->image = isset($image) ? $image : $author->image;
         $author->message = $request->message;
         $author->save();
-
+        alert()->success('Add','Author add successfully');
         return back();
     }
 
@@ -56,25 +52,18 @@ class AuthorController extends Controller
                 'image' => 'nullable|image|mimes:jpg,png,jpeg,webp'
             ]);
 
-            $author_slug = str($request->name)->slug();
-            $slug_count = Author::where('slug','LIKE', '%'.$author_slug.'%')->count();
-            if($slug_count > 0){
-                $author_slug .= '-' . $slug_count + 1 ;
-            }
-
             if($request->hasFile('image')){
-                $image = str()->random(5).time().'.'.$request->image->extension();
-                $request->image->storeAs('Author',$image, 'public');
+                $image = $this->ImageUplode($request->image, 'Author');
             }
 
             $author = Author::find($id);
 
             $author->name = $request->name;
-            $author->slug = $author_slug;
+            $author->slug = $this->slug_Generator($request->name, Author::class);
             $author->image = isset($image) ? $image : $author->image;
             $author->message = $request->message;
             $author->save();
-
+            alert()->success('Update','Author update successfully');
             return back();
         }
 

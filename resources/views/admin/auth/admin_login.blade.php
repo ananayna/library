@@ -121,11 +121,11 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                  <span class="app-brand-text demo text-body fw-bolder">CMPI</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-4">Welcome to Ecommerce! 👋</h4>
+              <h4 class="mb-4">Welcome to CMPI Library! 🤞</h4>
 
               <p class="mb-4">Please sign-in to your <span class="fw-bolder h5 text-primary text-uppercase">Admin Account</span> and start the adventure</p>
                 @if(session('error'))
